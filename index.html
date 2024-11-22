@@ -8,10 +8,78 @@
 <body>
     <header>
         <h1>Alchemist 101</h1>
-        <h2>Make your own potion and take over the world</h2>
+        <h2>Faites vos propres potions et prenez le controle du monde !</h2>
     </header>
     <main>
-        
+        <h2>Choisissez vos ingredients...</h2>
+        <ul id="choix_ingredients">
+            <li id="moustaches">
+                <label>
+                    <input type="checkbox" id="moustaches_box" value="Moustaches de chat">
+                    Moustaches de chat
+                </label>
+                <img src="./img/moustache.svg" alt="Moustaches de chat">
+            </li>
+            <li id="chauve_souris">
+                <label>
+                    <input type="checkbox" id="chauve_souris_box" value="Ailes de chauve souris">
+                    Ailes de chauve souris
+                </label>
+                <img src="./img/chauve_souris.svg" alt="Ailes de chauves souris">
+            </li>
+            <li id="diamant">
+                <label>
+                    <input type="checkbox" id="diamant_box" value="Diamant">
+                    Diamant
+                </label>
+                <img src="./img/diamant.svg" alt="Diamant">
+            </li>
+            <li id="corne_licorne">
+                <label>
+                    <input type="checkbox" id="corne_box" value="Corne de licorne">
+                    Corne de licorne
+                </label>
+                <img src="./img/licorne.svg" alt="Corne de licorne">
+            </li>
+            <li id="petale">
+                <label>
+                    <input type="checkbox" id="petale_box" value="Pétales de fleur">
+                    Pétales de fleur
+                </label>
+                <img src="./img/petale.svg" alt="Petales">
+            </li>
+            <li id="phenix">
+                <label>
+                    <input type="checkbox" id="phenix" value="Plumes de Phenix">
+                    Plumes de Phenix
+                </label>
+                <img src="./img/phenix.svg" alt="Plume de phenix">
+            </li>
+            <li id="liquide_bleu">
+                <label>
+                    <input type="checkbox" id="liquide_bleu_box" value="Liquide bleu inconnu">
+                    Liquide bleu inconnu
+                </label>
+                <img src="./img/potion.svg" alt="Liquide bleu">
+            </li>
+            <li id="liquide_vert">
+                <label>
+                    <input type="checkbox" id="liquide_vert_box" value="Liquide vert inconnu">
+                    Liquide vert inconnu
+                </label>
+                <img src="./img/potion.svg" alt="Liquide vert">
+            </li>
+            <li id="liquide_orange">
+                <label>
+                    <input type="checkbox" id="liquide_orange_box" value="Liquide orange inconnu">
+                    Liquide orange inconnu
+                </label>
+                <img src="./img/potion.svg" alt="Liquide orange">
+            </li>
+        </ul>
+        <button id="brassage">Brassage en cours</button>
+        <div id="resultat"></div>
     </main>
 </body>
+<script src="./index.js"></script>
 </html>

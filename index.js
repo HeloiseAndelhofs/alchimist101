@@ -7,6 +7,8 @@ const ingredients_inputs = document.querySelectorAll("#choix_ingredients input")
 console.log(ingredients_inputs);
 let ingredientsChoisis = [];
 let resultPotion = [];
+const inputs = document.getElementsByTagName("input")
+
 
 //tableau d'objets, potions créées
 
@@ -44,6 +46,7 @@ const potions = [
   ];
 
 
+
 //fonctions
 
 
@@ -63,22 +66,49 @@ function update_ingredients() {
 //regarde si un changement est fait dans chaques elements de l'ul, si changement ==> fonctions update_ingredients
 ingredients_inputs.forEach(input => {
     input.addEventListener("change", update_ingredients)
-})
+});
 
-// console.log(ingredients);
+
+
+
+
+//fonctions pour trouver la potion associée
 
 function brassage_en_cours() {
-    console.log("Ingrédients choisis " + ingredientsChoisis);
-    
-    // resultPotion = potions.find(potion => potion.ingredients.includes(ingredientsChoisis))
-
-    // potions.forEach(potion => {
-    //     potion.ingredients
-    // });
-
-    console.log("Potion " + resultPotion);
-    
-    return resultPotion
+  // Trouver la potion qui correspond aux ingrédients choisis
+  const potionTrouvee = potions.find(potion =>
+    potion.ingredients.every(ingredient => ingredientsChoisis.includes(ingredient)) &&
+    ingredientsChoisis.length === potion.ingredients.length // Vérifie également que les longueurs correspondent
+  );
+  
+  // Afficher le résultat dans le DOM
+  const resultatDiv = document.getElementById("resultat");
+  if (potionTrouvee) {
+    resultatDiv.innerHTML = `
+    <h3>${potionTrouvee.name}</h3>
+    <p>${potionTrouvee.effect}</p>
+    `;
+  } else {
+    resultatDiv.innerHTML = `
+    <h3>Aucune potion trouvée</h3>
+    <p>Essayez une autre combinaison d'ingrédients.</p>
+    `;
+  }
 }
 
-document.getElementById("brassage").addEventListener("click", brassage_en_cours)
+
+function empty_potions() {
+  ingredientsChoisis = [];
+  console.log(ingredientsChoisis);
+  Array.from(inputs).forEach(input => {
+    if (input.type === "checkbox") {
+      input.checked = false
+    }
+  })
+}
+
+
+document.getElementById("brassage").addEventListener("click", () => {
+  brassage_en_cours();
+  empty_potions();
+});

@@ -143,7 +143,7 @@ document.getElementById("brassage").addEventListener("click", () => {
 });
 
 
-//bulles dans le background lors du brassage
+//bulles dans le background lors du brassage 
 function generateBubbles() {
   const bubbleContainer = document.createElement("div");
   bubbleContainer.id = "bubble-container";

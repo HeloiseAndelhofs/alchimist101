@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Cormorant Garamond', serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to bottom, #0e0f14, #3d526b, #6570d1);
     color: #c5c6c7;
     overflow: hidden;
@@ -123,6 +123,7 @@ main {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: ease-in 2s;
 }
 
 /* ANIMATIONS */
@@ -143,7 +144,7 @@ main {
 }
 
 #resultat.animate {
-    animation: shadowEffect 1.5s infinite;
+    animation: shadowEffect 1s infinite;
 }
 
 @keyframes shadowEffect {
@@ -152,6 +153,24 @@ main {
     }
     50% {
         box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 1;
     }
 }
 

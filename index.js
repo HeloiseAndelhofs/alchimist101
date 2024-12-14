@@ -4,13 +4,15 @@
 //tableau resultat vide
 
 const ingredients_inputs = document.querySelectorAll("#choix_ingredients input");
-console.log(ingredients_inputs);
 let ingredientsChoisis = [];
 let resultPotion = [];
+let storagePotions = [];
+let potionTrouvee
 const inputs = document.getElementsByTagName("input")
+const resultatDiv = document.getElementById("resultat");
 
 
-//tableau d'objets, potions créées
+//tableau d'objets, potions répertoriées
 
 const potions = [
     {
@@ -47,7 +49,22 @@ const potions = [
 
 
 
-//fonctions
+//tableau d'effets pour les potions non répertoriées
+const effetsAleatoires = [
+    "Vous obtenez une potion qui change la couleur de vos cheveux.",
+    "Votre potion émet une lumière vive pendant 30 secondes.",
+    "Une potion explosive qui disparaît dans un nuage de fumée.",
+    "Un liquide inoffensif, mais au goût incroyable de fraise.",
+    "Une potion qui fait entendre des rires quand elle est renversée.",
+    "Une potion qui transforme vos vêtements en costumes de clown.",
+    "Un simple liquide qui ne fait rien d'extraordinaire.",
+    "Un mélange qui chante une berceuse douce lorsque secoué.",
+    "Une potion glaciale qui refroidit instantanément les boissons.",
+    "Un élixir étrange qui vous donne des moustaches pendant une heure."
+];
+
+
+  //fonctions
 
 
 //cree un nouveau tableau à chaque fois qu'un changement est effectué dans l'ul
@@ -56,9 +73,7 @@ function update_ingredients() {
     ingredientsChoisis = Array.from(ingredients_inputs)
         .filter(ingredient => ingredient.checked)
         .map(ingredient => ingredient.value)
-    
-    console.log(ingredientsChoisis);
-        
+            
         return ingredientsChoisis
 }
 
@@ -69,37 +84,57 @@ ingredients_inputs.forEach(input => {
 });
 
 
-
+//fonction pour vérifier si les ingrédients choisis font partie d'une potion répertoriée ou si les ingrédients on déja été choisi pour faire une potion
+function isFind(potionsArray) {
+  return potionsArray.find(potion => 
+  potion.ingredients.every(ingredient => 
+  ingredientsChoisis.includes(ingredient)) && ingredientsChoisis.length === potion.ingredients.length) // Vérifie également que les longueurs correspondent
+}
 
 
 //fonctions pour trouver la potion associée
 
 function brassage_en_cours() {
   // Trouver la potion qui correspond aux ingrédients choisis
-  const potionTrouvee = potions.find(potion =>
-    potion.ingredients.every(ingredient => ingredientsChoisis.includes(ingredient)) &&
-    ingredientsChoisis.length === potion.ingredients.length // Vérifie également que les longueurs correspondent
-  );
+  potionTrouvee = isFind(potions)
   
+
   // Afficher le résultat dans le DOM
-  const resultatDiv = document.getElementById("resultat");
   if (potionTrouvee) {
-    resultatDiv.innerHTML = `
+    return resultatDiv.innerHTML = `
     <h3>${potionTrouvee.name}</h3>
     <p>${potionTrouvee.effect}</p>
     `;
-  } else {
-    resultatDiv.innerHTML = `
-    <h3>Aucune potion trouvée</h3>
-    <p>Essayez une autre combinaison d'ingrédients.</p>
-    `;
   }
+
+  if (isFind(storagePotions)){
+      const ingredientsMatch = isFind(storagePotions)
+      return resultatDiv.innerHTML = `
+      <h3> Vous avez recréé une de vos invention !</h3>
+      <p>${ingredientsMatch.effet}</p>`
+      
+      
+  } else {
+    const randomEffect = effetsAleatoires[Math.floor(Math.random() * effetsAleatoires.length)]
+    storagePotions.push({"ingredients" : ingredientsChoisis, "effet" : randomEffect})
+    resultatDiv.innerHTML = `
+    <h3> Vous avez créer une potion inconnue ! Les effets ont l'air intéressant... </h3>
+    <p>${randomEffect}</p>
+    `
+  }
+
+
+  // else {
+  //   resultatDiv.innerHTML = `
+  //   <h3>Aucune potion trouvée</h3>
+  //   <p>Essayez une autre combinaison d'ingrédients.</p>
+  //   `;
+  // }
 }
 
 
 function empty_potions() {
   ingredientsChoisis = [];
-  console.log(ingredientsChoisis);
   Array.from(inputs).forEach(input => {
     if (input.type === "checkbox") {
       input.checked = false
@@ -112,3 +147,6 @@ document.getElementById("brassage").addEventListener("click", () => {
   brassage_en_cours();
   empty_potions();
 });
+
+
+

@@ -102,6 +102,7 @@ function brassage_en_cours() {
     return resultatDiv.innerHTML = `
     <h3>${potionTrouvee.name}</h3>
     <p>${potionTrouvee.effect}</p>
+    <iframe src="https://giphy.com/embed/vr3kkMijqm5hxwrfJ1" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/love-potion-vr3kkMijqm5hxwrfJ1"></a></p>
     `;
   }
 
@@ -110,7 +111,8 @@ function brassage_en_cours() {
       const ingredientsMatch = isFind(storagePotions)
       return resultatDiv.innerHTML = `
       <h3> Vous avez recréé une de vos invention !</h3>
-      <p>${ingredientsMatch.effet}</p>`
+      <p>${ingredientsMatch.effet}</p>
+      <iframe src="https://giphy.com/embed/vr3kkMijqm5hxwrfJ1" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/love-potion-vr3kkMijqm5hxwrfJ1"></a></p>`
       
   //potion inconnue, donne un effet aléatoire et ajoute les ingrédient + l'effet dans storagePotions
   } else {
@@ -118,7 +120,8 @@ function brassage_en_cours() {
     storagePotions.push({"ingredients" : ingredientsChoisis, "effet" : randomEffect});
     resultatDiv.innerHTML = `
     <h3> Vous avez créer une potion inconnue ! Les effets ont l'air intéressant... </h3>
-    <p>${randomEffect}</p>`
+    <p>${randomEffect}</p>
+    <iframe src="https://giphy.com/embed/vr3kkMijqm5hxwrfJ1" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/love-potion-vr3kkMijqm5hxwrfJ1"></a></p>`
   }
 }
 
@@ -132,13 +135,13 @@ function empty_potions() {
   })
 }
 
-
+//enclenche brassage_en_cours et empty_potions après un set timeout
 document.getElementById("brassage").addEventListener("click", () => {
-  resultatDiv.classList.add("animate")
+  resultatDiv.style.visibility = `hidden`
   setTimeout(() => {
-    brassage_en_cours();
     empty_potions();
-    resultatDiv.classList.remove("animate");
+    brassage_en_cours();
+    resultatDiv.style.visibility = `visible`
 }, 5000);
 });
 
@@ -149,14 +152,14 @@ function generateBubbles() {
   bubbleContainer.id = "bubble-container";
   document.body.appendChild(bubbleContainer);
 
-  const bubbleCount = 20; // Nombre de bulles à générer
+  const bubbleCount = 30; // Nombre de bulles à générer
 
   for (let i = 0; i < bubbleCount; i++) {
       const bubble = document.createElement("div");
       bubble.classList.add("bubble");
       
       // Taille aléatoire
-      const size = Math.random() * 60 + 20; // Entre 10px et 60px
+      const size = Math.random() * 60 + 30; // Entre 10px et 60px
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
 
@@ -188,7 +191,21 @@ function generateBubbles() {
   }, 5000);
 }
 
+function lets_brew() {
+  const drew_gif_container = document.createElement("div");
+  drew_gif_container.id = "drew_gif";
+  document.getElementById("resultatSection").appendChild(drew_gif_container)
+
+  drew_gif_container.innerHTML = `
+  <iframe src="https://giphy.com/embed/aaP3ZqBLqph2UvjvvV" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/magic-cooking-mixing-aaP3ZqBLqph2UvjvvV"></a></p>
+  `
+  setTimeout(() => {
+    document.getElementById("resultatSection").removeChild(drew_gif_container);
+  }, 5000);
+}
+
 // Activer les bulles pendant le brassage
 document.getElementById("brassage").addEventListener("click", () => {
+  lets_brew()
   generateBubbles();
 });

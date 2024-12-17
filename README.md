@@ -14,11 +14,11 @@ Algorithme plus complet pour créer les potions pré déterminée ?
 
 Arranger le style (plus d'animations lors du brassage ? adoucire les transitions à l'ajout de la div resultat)
 
-Aggrandir la zone des checkboxs
-Enlever l'effet de la potion précédente
+<!-- Aggrandir la zone des checkboxs -->
+<!-- Enlever l'effet de la potion précédente -->
 
 Possibilité d'ajouter des ingrédients ?
 Ajouter une image/gif d'une potion quand elle est créée 
 
 Couleurs sur les ingrédients ?
-Chaudron pendant le brassage ?
+<!-- Chaudron pendant le brassage ? -->

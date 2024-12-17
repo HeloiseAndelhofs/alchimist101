@@ -90,6 +90,7 @@ main {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 #resultatSection button {
@@ -108,6 +109,18 @@ main {
     background: linear-gradient(to bottom, #a27f1e, #d4af37);
     transform: scale(1.1) rotate(2deg);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+#drew_gif {
+    padding-bottom: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 25%;
+    left: 25%;
+}
+
+#drew_gif iframe {
+    border-radius: 50px;
 }
 
 #resultat {
@@ -131,6 +144,12 @@ main {
     animation: press 0.2s;
 }
 
+#resultat iframe {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
 @keyframes press {
     0% {
         transform: scale(1);
@@ -143,20 +162,7 @@ main {
     }
 }
 
-#resultat.animate {
-    animation: shadowEffect 1s infinite;
-}
-
-@keyframes shadowEffect {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 255, 255, 1);
-    }
-}
-
-@keyframes fade-in {
+/* @keyframes fade-in {
     0% {
         opacity: 0;
     }
@@ -172,7 +178,7 @@ main {
     100% {
         opacity: 1;
     }
-}
+} */
 
 
 
@@ -194,6 +200,7 @@ main {
     bottom: 0;
     background: rgba(255, 255, 255, 0.658);
     border-radius: 50%;
+    /* box-shadow: #ffffffcc 70px 50px 30px ;    ??????? */
     animation: rise 4s ease-in infinite;
     opacity: 0;
     transition: opacity 1s ease-out, transform 1s ease-out;

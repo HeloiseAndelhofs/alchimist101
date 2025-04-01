@@ -73,7 +73,7 @@ function update_ingredients() {
     ingredientsChoisis = Array.from(ingredients_inputs)
         .filter(ingredient => ingredient.checked)
         .map(ingredient => ingredient.value)
-            
+
         return ingredientsChoisis
 }
 
@@ -87,7 +87,8 @@ ingredients_inputs.forEach(input => {
 //fonction pour vérifier si les ingrédients choisis font partie d'une potion répertoriée ou si les ingrédients on déja été choisi pour faire une potion
 function isFind(potionsArray) {
   return potionsArray.find(potion => 
-         potion.ingredients.every(ingredient => ingredientsChoisis.includes(ingredient)) && ingredientsChoisis.length === potion.ingredients.length) 
+    potion.ingredients.sort().toString() === ingredientsChoisis.sort().toString());
+  
          // Vérifie également que les longueurs correspondent
 }
 
@@ -95,6 +96,7 @@ function isFind(potionsArray) {
 //fonctions pour trouver la potion associée
 
 function brassage_en_cours() {
+
   // Trouver la potion qui correspond aux ingrédients choisis
   potionTrouvee = isFind(potions)
   // Afficher le résultat dans le DOM
@@ -109,6 +111,7 @@ function brassage_en_cours() {
   //si les ingredients sont dans storagePotions, affiche l'effet random qui y a été associé
   if (isFind(storagePotions)){
       const ingredientsMatch = isFind(storagePotions)
+      
       return resultatDiv.innerHTML = `
       <h3> Vous avez recréé une de vos invention !</h3>
       <p>${ingredientsMatch.effet}</p>
@@ -125,6 +128,7 @@ function brassage_en_cours() {
   }
 }
 
+
 //efface les cases cochées et les ingredients apres le brassage
 function empty_potions() {
   ingredientsChoisis = [];
@@ -135,15 +139,26 @@ function empty_potions() {
   })
 }
 
-//enclenche brassage_en_cours et empty_potions après un set timeout
 document.getElementById("brassage").addEventListener("click", () => {
-  resultatDiv.style.visibility = `hidden`
+  resultatDiv.style.visibility = `hidden`;
+
+  update_ingredients(); // Mettre à jour les ingrédients
+
+  // if (ingredientsChoisis.length < 3) {
+  //   resultatDiv.innerHTML = `<p>⚠️ Il faut au moins 3 ingrédients pour créer une potion !</p>`;
+  //   resultatDiv.style.visibility = `visible`;
+  //   return; // Stoppe l'exécution ici si on n'a pas assez d'ingrédients
+  // }
+
   setTimeout(() => {
-    empty_potions();
-    brassage_en_cours();
-    resultatDiv.style.visibility = `visible`
-}, 5000);
+    brassage_en_cours(); 
+
+    resultatDiv.style.visibility = `visible`;
+
+    empty_potions(); // On efface SEULEMENT après brassage !
+  }, 5000);
 });
+
 
 
 //bulles dans le background lors du brassage 
